@@ -1,0 +1,10 @@
+display/4i $pc
+display/t $ps
+display/x $edi
+display/x $esi
+display/x $ebp
+display/x $esp
+display/x $ebx
+display/x $edx
+display/x $ecx
+display/x $eax
