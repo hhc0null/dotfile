@@ -1,0 +1,19 @@
+import readline
+import rlcompleter
+import atexit
+import os
+
+# tab complete
+readline.parse_and_bind('tab: complete')
+
+# history
+history = os.path.join(os.environ['HOME'], '.python_history')
+try:
+    readline.read_history_file(history)
+except IOError:
+    sys.stdout.write("couldn't find .python_history")
+    pass
+atexit.register(readline.write_history_file, history)
+del os, readline, rlcompleter, atexit, history
+
+

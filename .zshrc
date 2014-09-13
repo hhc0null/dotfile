@@ -28,7 +28,8 @@ export LPE=$HOME/cmd/LPE_1.4
 export ODBG=$HOME/cmd/odbg110
 export TMPY=$HOME/.template.py
 export BLUE=/usr/lib/blue
-
+export CLOJURE_HOME=/usr/share/clojure
+export PYTHONSTARTUP=~/.pythonrc
 
 ## autoload
 autoload -U compinit
@@ -68,3 +69,6 @@ alias wine='LANG=ja_JP.utf8 wine'
 alias skype='QT_IM_MODULE=ibus skype'
 alias stegsolve='java -jar ~/ctf/tools/Stegsolve.jar'
 alias ls='ls -v -F --color=auto'
+alias gitrm='git rm --cached'
+alias rot13='tr A-Za-z N-ZA-Mn-za-m'
+alias clojure-repl='java -cp $CLOJURE_HOME/clojure.jar clojure.main'

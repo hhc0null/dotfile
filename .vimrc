@@ -3,30 +3,37 @@ filetype off
 
 "launch neobundle
 if has('vim_starting')
-    set runtimepath+=~/.bundle/neobundle.vim
-    call neobundle#rc(expand('~/.bundle'))
+    set runtimepath+=~/.vim/bundle/neobundle.vim
+    call neobundle#begin(expand('~/.vim/bundle/'))
 endif
 
-"NeoBundle 'Shougo/neobundle.vim'
-NeoBundle 'https://github.com/Shougo/neobundle.vim.git'
-NeoBundle 'https://github.com/Shougo/unite.vim.git'
-NeoBundle 'https://github.com/Shougo/vinarise.git'
-NeoBundle 'https://github.com/motemen/git-vim'
-NeoBundle 'https://github.com/thinca/vim-quickrun'
+NeoBundleFetch 'Shougo/neobundle.vim'
+"NeoBundle '5t111111/alt-gtags.vim'
+NeoBundle 'vim-scripts/gtags.vim'
+NeoBundle 'Shougo/unite.vim'
+NeoBundle 'Shougo/vinarise.vim'
+NeoBundle 'Shougo/vimshell.vim'
+NeoBundle 'Shougo/vimproc.vim'
+NeoBundle 'motemen/git-vim'
+NeoBundle 'thinca/vim-quickrun'
+NeoBundle 'vim-scripts/slimv.vim'
+NeoBundle 'scrooloose/nerdtree'
+NeoBundle 'Townk/vim-autoclose'
+call neobundle#end()
 
 " neocomplcache
 let g:neocomplcache_enable_at_startup = 1 " launch at starting_up
 let g:neocomplcache_dictionary_filetype_lists = {
-	\ 'default' : '',
-	\ 'scala' : $HOME . '/.vim/dict/scala.dict',
+	\ 'default' : ''
 	\ }
-let g:PHP_default_indenting = 1
+"let g:PHP_default_indenting = 1
 
-let g:quickrun_config = {
-\       "cpp/g++" : {
-\               "cmdopt" : "--std=c++11",
-\       },
-\}
+let g:quickrun_config ={}
+let g:quickrun_config._ = {'runner' : 'vimproc'}
+let g:quickrun_config.cpp = {
+            \ 'command' : 'g++',
+            \ 'cmdopt' : '-std=c++11 -Wall'
+            \ }
 
 filetype plugin on
 filetype indent on
@@ -45,19 +52,12 @@ set termencoding=utf-8
 set number
 set cursorline
 set hlsearch
+set wildmode=list:full
 
 autocmd FileType asm :set tabstop=4 fileencoding=utf-8 shiftwidth=4
 autocmd FileType binary :set nocursorline nonumber
-autocmd FileType python :set tabstop=2 fileencoding=utf-8 " :let g:pydiction_location = '$HOME/.vim/pydiction/complete-dict' 
+autocmd FileType python :set tabstop=2 fileencoding=utf-8
 autocmd FileType ruby :set tabstop=2 shiftwidth=2 fileencoding=utf-8
 autocmd FileType java :set fileencoding=utf-8
-autocmd FileType scala :set fileencoding=utf-8
-autocmd FileType idc :source $HOME/.vim/syntax/idc.vim
 autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g`\"" | endif
-let lisp_rainbow = 1
 
-map <C-q> :Gtags
-map <C-h> :Gtags -f %<CR>
-map <C-j> :GtagsCursor<CR>
-map <C-n> :cn<CR>
-map <C-p> :cp<CR>
