@@ -23,10 +23,43 @@ call neobundle#end()
 "}}}
 
 " neocomplcache {{{
+" Define startup routines
+let g:acp_enableAtStartup = 0 " Disable AutoComplPop
 let g:neocomplcache_enable_at_startup = 1 " launch at starting_up
+let g:neocomplcache_enable_smart_case = 1 " enable smart case
+let g:neocomplcache_enable_camel_case_completion = 1 " enable camel case
+let g:neocomplcache_enable_underbar_completion = 1 " enable underbar completion
+let g:neocomplcache_min_syntax_length = 3 " this is good at reading assembly.
+let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*' " defeating for competing with ku.vim
+
 let g:neocomplcache_dictionary_filetype_lists = {
 	\ 'default' : ''
 	\ }
+
+" Define keywords.
+if !exists('g:neocomplcache_keyword_patterns')
+    let g:neocomplcache_keyword_patterns = {}
+endif
+    let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
+
+" Plugin key-mappings.
+inoremap <expr><C-g>    neocomplcache#undo_completion()
+inoremap <expr><C-l>    neocomplcache#complete_common_string()
+
+" Recomended key-mappings.
+" <CR>: close popup and save indent.
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+    return neocomplcache#smart_close_popup() . "\<CR>"
+endfunction
+
+" <TAB>: completion.
+inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+" <C-h>, <BS>: close popup and delete backword char.
+inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
+inoremap <expr><C-y> neocomplcache#smart_close_popup()
+inoremap <expr><C-e> neocomplcache#smart_close_popup()
 " }}}
 
 " quickrun {{{
@@ -55,6 +88,7 @@ set number
 set cursorline
 set hlsearch
 set wildmode=list:full
+set display=uhex
 
 autocmd FileType asm :set tabstop=4 fileencoding=utf-8 shiftwidth=4
 autocmd FileType binary :set nocursorline nonumber
