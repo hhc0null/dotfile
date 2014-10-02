@@ -8,8 +8,7 @@ if has('vim_starting')
 endif
 
 NeoBundleFetch 'Shougo/neobundle.vim'
-"NeoBundle '5t111111/alt-gtags.vim'
-NeoBundle 'vim-scripts/gtags.vim'
+NeoBundle '5t111111/alt-gtags.vim'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/vinarise.vim'
 NeoBundle 'Shougo/vimshell.vim'
@@ -35,9 +34,8 @@ let g:quickrun_config.cpp = {
             \ 'cmdopt' : '-std=c++11 -Wall'
             \ }
 
-filetype plugin on
-filetype indent on
-syn on
+filetype indent plugin on
+syntax on
 
 set expandtab
 set autoindent
@@ -61,3 +59,11 @@ autocmd FileType ruby :set tabstop=2 shiftwidth=2 fileencoding=utf-8
 autocmd FileType java :set fileencoding=utf-8
 autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g`\"" | endif
 
+" QuickFix
+map <C-n> :cn<CR>
+map <C-p> :cp<CR>
+" alt-gtags.vim
+nnoremap <C-h> :AltGtags -f<CR>
+nnoremap <C-j> :AltGtags<CR>
+nnoremap <C-k> :AltGtags -r<CR>
+nnoremap <C-l> :AltGtags -s<CR>
