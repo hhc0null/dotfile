@@ -30,6 +30,8 @@ export TMPY=$HOME/.template.py
 export BLUE=/usr/lib/blue
 export CLOJURE_HOME=/usr/share/clojure
 export PYTHONSTARTUP=~/.pythonrc
+export GOPATH=~/codes/go
+export PATH=$PATH:~/go/bin:~/.gem/ruby/2.1.0/bin
 
 ## autoload
 autoload -U compinit
