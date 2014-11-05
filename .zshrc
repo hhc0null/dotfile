@@ -14,6 +14,8 @@ HISTSIZE=10000
 SAVEHIST=10000
 
 #etc
+## directory stack
+setopt autopushd
 ## keybind(like the vim)
 bindkey -v
 ulimit -c 1000000

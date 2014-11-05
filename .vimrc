@@ -8,17 +8,25 @@ if has('vim_starting')
     call neobundle#begin(expand('~/.vim/bundle/'))
 endif
 
+" Shougo
 NeoBundleFetch 'Shougo/neobundle.vim'
-NeoBundle '5t111111/alt-gtags.vim'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/vinarise.vim'
 NeoBundle 'Shougo/vimshell.vim'
 NeoBundle 'Shougo/vimproc.vim'
+NeoBundle 'Shougo/neocomplcache'
+NeoBundle 'scrooloose/nerdtree'
+" For Programmings 
+NeoBundle '5t111111/alt-gtags.vim'
+NeoBundle 'Townk/vim-autoclose'
 NeoBundle 'motemen/git-vim'
 NeoBundle 'thinca/vim-quickrun'
-NeoBundle 'vim-scripts/slimv.vim'
-NeoBundle 'scrooloose/nerdtree'
-NeoBundle 'Townk/vim-autoclose'
+NeoBundle 'vim-scripts/Pydiction'
+NeoBundle 'vim-scripts/gtags.vim'
+" Clojure
+NeoBundle 'guns/vim-clojure-static'
+NeoBundle 'guns/vim-clojure-highlight'
+NeoBundle 'tpope/fireplace'
 call neobundle#end()
 "}}}
 
@@ -36,12 +44,6 @@ let g:neocomplcache_dictionary_filetype_lists = {
 	\ 'default' : ''
 	\ }
 
-" Define keywords.
-if !exists('g:neocomplcache_keyword_patterns')
-    let g:neocomplcache_keyword_patterns = {}
-endif
-    let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
-
 " Plugin key-mappings.
 inoremap <expr><C-g>    neocomplcache#undo_completion()
 inoremap <expr><C-l>    neocomplcache#complete_common_string()
@@ -57,9 +59,9 @@ endfunction
 inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 " <C-h>, <BS>: close popup and delete backword char.
 inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
-inoremap <expr><C-y> neocomplcache#smart_close_popup()
-inoremap <expr><C-e> neocomplcache#smart_close_popup()
+"inoremap <expr><BS>  neocomplcache#smart_close_popup()."\<C-h>"
+inoremap <expr><C-y> neocomplcache#close_popup()
+inoremap <expr><C-e> neocomplcache#cancel_popup()
 " }}}
 
 " quickrun {{{
@@ -89,10 +91,16 @@ set cursorline
 set hlsearch
 set wildmode=list:full
 set display=uhex
+set foldmethod=marker
 
 autocmd FileType asm :set tabstop=4 fileencoding=utf-8 shiftwidth=4
 autocmd FileType binary :set nocursorline nonumber
-autocmd FileType python :set tabstop=2 fileencoding=utf-8
+" FileType python {{{
+autocmd FileType python setl autoindent
+autocmd FileType python setl smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
+autocmd FileType python setl tabstop=4 shiftwidth=4 softtabstop=4
+autocmd FileType python let g:pydiction_location = '~/.vim/bundle/Pydiction/complete-dict'
+"}}}
 autocmd FileType ruby :set tabstop=2 shiftwidth=2 fileencoding=utf-8
 autocmd FileType java :set fileencoding=utf-8
 autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g`\"" | endif
