@@ -16,4 +16,23 @@ except IOError:
 atexit.register(readline.write_history_file, history)
 del os, readline, rlcompleter, atexit, history
 
+import binascii
+import capstone
+from ctypes import *
+import numpy
+import pefile
+import re
+import socket
+import string
+import struct
+import subprocess
+import sys
 
+def ls():
+    subprocess.check_call("ls", shell=True)
+
+def p(x, t="<I"):
+    return struct.pack(t, x)
+
+def u(x, t="<I"):
+    return struct.unpack(t, x)[0]

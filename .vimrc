@@ -23,10 +23,17 @@ NeoBundle 'motemen/git-vim'
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'vim-scripts/Pydiction'
 NeoBundle 'vim-scripts/gtags.vim'
+NeoBundle 'vim-scripts/armasm.vim'
 " Clojure
 NeoBundle 'guns/vim-clojure-static'
 NeoBundle 'guns/vim-clojure-highlight'
-NeoBundle 'tpope/fireplace'
+NeoBundle 'tpope/vim-fireplace'
+" Scheme
+NeoBundle 'aharisu/vim_goshrepl'
+" Markdown
+NeoBundle 'kannokanno/previm'
+NeoBundle 'plasticboy/vim-markdown'
+NeoBundle 'tyru/open-browser.vim'
 call neobundle#end()
 "}}}
 
@@ -92,6 +99,7 @@ set hlsearch
 set wildmode=list:full
 set display=uhex
 set foldmethod=marker
+set matchpairs+=<:>
 
 autocmd FileType asm :set tabstop=4 fileencoding=utf-8 shiftwidth=4
 autocmd FileType binary :set nocursorline nonumber
@@ -115,4 +123,10 @@ nnoremap <C-h> :AltGtags -f<CR>
 nnoremap <C-j> :AltGtags<CR>
 nnoremap <C-k> :AltGtags -r<CR>
 nnoremap <C-l> :AltGtags -s<CR>
+" }}}
+
+" Previm {{{
+augroup PrevimSettings
+    autocmd!
+    autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
 " }}}

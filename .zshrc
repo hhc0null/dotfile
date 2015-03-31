@@ -34,6 +34,7 @@ export CLOJURE_HOME=/usr/share/clojure
 export PYTHONSTARTUP=~/.pythonrc
 export GOPATH=~/codes/go
 export PATH=$PATH:~/go/bin:~/.gem/ruby/2.1.0/bin
+export JAVA_HOME=/usr/lib/jvm/default
 
 ## autoload
 autoload -U compinit
